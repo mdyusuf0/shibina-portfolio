@@ -164,9 +164,8 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Top Left Main Content Block (Placed at Left-Top) */}
+      {/* [TOP LEFT] Heading & Bio Block */}
       <div className="absolute top-[60px] md:top-[76px] left-6 md:left-12 lg:left-20 z-20 flex flex-col items-start text-left max-w-lg lg:max-w-xl">
-        
         {/* Hello & Welcome to my Digital Space */}
         <span 
           data-aos="fade-up"
@@ -186,9 +185,13 @@ const Hero = () => {
             {heroContent.subtitle}
           </span>
         </h1>
+      </div>
 
+      {/* [LEFT BOTTOM] Live Sites, Metrics, and Action Buttons Block */}
+      <div className="absolute bottom-6 md:bottom-8 left-6 md:left-12 lg:left-20 z-20 flex flex-col items-start text-left max-w-lg lg:max-w-xl">
+        
         {/* Live Websites Pill Bar */}
-        <div data-aos="fade-up" data-aos-delay="250" className="flex flex-wrap gap-2 my-2.5">
+        <div data-aos="fade-up" data-aos-delay="250" className="flex flex-wrap gap-2 mb-2">
           <a
             href="https://mizco.ae"
             target="_blank"
@@ -219,7 +222,7 @@ const Hero = () => {
         </div>
 
         {/* Floating Metrics Row */}
-        <div data-aos="fade-up" data-aos-delay="350" className="grid grid-cols-2 sm:grid-cols-4 gap-2 my-2.5 w-full">
+        <div data-aos="fade-up" data-aos-delay="350" className="grid grid-cols-2 sm:grid-cols-4 gap-2 my-2 w-full">
           {heroContent.stats.map((stat, idx) => (
             <div key={idx} className="glass-card p-2 text-center rounded-xl gemini-edge-glow">
               <p className="text-sm font-bold text-slate-900 leading-tight">{stat.value}</p>
@@ -268,7 +271,7 @@ const Hero = () => {
       <div 
         data-aos="zoom-in"
         data-aos-delay="600"
-        className="absolute bottom-10 right-6 md:right-12 flex flex-col items-center gap-3 cursor-pointer group z-30"
+        className="absolute bottom-8 right-6 md:right-12 flex flex-col items-center gap-3 cursor-pointer group z-30"
       >
         {/* Play/Pause Button */}
         <div 
