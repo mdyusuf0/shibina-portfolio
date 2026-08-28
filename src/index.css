@@ -93,54 +93,19 @@
 }
 
 /* ============================================================
-   Gemini Premium Dynamic Colorful Edge Glow Effect — EDGE ONLY
+   Gemini Premium Dynamic Colorful Edge Glow Effect — BORDER ONLY
    ============================================================ */
 .gemini-edge-glow {
-  position: relative;
-  z-index: 1;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease !important;
 }
 
-.gemini-edge-glow::before {
-  content: '';
-  position: absolute;
-  inset: -2px;
-  border-radius: inherit;
-  background: linear-gradient(135deg, #a855f7, #ec4899, #3b82f6, #06b6d4, #10b981, #f59e0b, #a855f7);
-  background-size: 300% 300%;
-  opacity: 0;
-  z-index: -1;
-  transition: opacity 0.35s ease, filter 0.35s ease;
-  animation: geminiSpectrum 6s linear infinite;
-  pointer-events: none;
-  filter: blur(5px);
-}
-
-.gemini-edge-glow:hover::before {
-  opacity: 1;
-}
-
-.gemini-edge-glow::after {
-  content: '';
-  position: absolute;
-  inset: -1px;
-  border-radius: inherit;
-  background: linear-gradient(135deg, #a855f7, #ec4899, #3b82f6, #06b6d4, #10b981, #f59e0b, #a855f7);
-  background-size: 300% 300%;
-  opacity: 0;
-  z-index: -1;
-  transition: opacity 0.35s ease;
-  animation: geminiSpectrum 6s linear infinite;
-  pointer-events: none;
-}
-
-.gemini-edge-glow:hover::after {
-  opacity: 0.9;
-}
-
-@keyframes geminiSpectrum {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+.gemini-edge-glow:hover {
+  border-color: rgba(168, 85, 247, 0.75) !important;
+  box-shadow: 
+    0 0 0 1.5px rgba(168, 85, 247, 0.5),
+    0 0 14px rgba(168, 85, 247, 0.35),
+    0 0 22px rgba(236, 72, 153, 0.25),
+    0 0 30px rgba(59, 130, 246, 0.2) !important;
 }
 
 /* Typography styles */

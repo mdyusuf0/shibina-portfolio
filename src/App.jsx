@@ -13,14 +13,12 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import CursorParticles from './components/CursorParticles';
 import BackgroundGlassObjects from './components/BackgroundGlassObjects';
-import SocialDock from './components/SocialDock';
 
 function App() {
   return (
     <div className="relative min-h-screen bg-[#FBFBFD] text-[#111827] overflow-x-hidden font-sans selection:bg-purple-600 selection:text-white">
       <BackgroundGlassObjects />
       <CursorParticles />
-      <SocialDock />
       <Preloader />
       <Navbar />
       <Hero />
