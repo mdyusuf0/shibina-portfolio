@@ -181,8 +181,10 @@ const Hero = () => {
           className="text-[#111827] text-3xl md:text-5xl font-extrabold tracking-tight leading-tight drop-shadow-xs"
         >
           Hi, I'm <span className="font-cursive text-5xl md:text-7xl text-purple-600 font-bold block mt-1">Shibina S</span>
-          <span className="block text-xs md:text-sm font-medium text-slate-700 mt-2 leading-relaxed">
-            {heroContent.subtitle}
+          <span className="block text-xs md:text-sm font-medium text-slate-700 mt-2.5 leading-relaxed space-y-1">
+            {heroContent.subtitle.split('\n').map((line, i) => (
+              <span key={i} className="block">{line}</span>
+            ))}
           </span>
         </h1>
       </div>

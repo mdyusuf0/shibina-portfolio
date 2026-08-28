@@ -31,12 +31,12 @@ export const socialLinks = {
 export const heroContent = {
   greeting: "Hello & Welcome to my Digital Space",
   headline: "Designing Elegant Web Experiences. Engineering Scalable Solutions.",
-  subtitle: "Web Developer & Software Engineer based in Dubai, UAE. Specializing in WooCommerce platforms, modern web architecture, Python/Django full-stack development, and enterprise systems.",
+  subtitle: "Web Developer & Software Engineer based in Dubai, UAE.\nSpecializing in WooCommerce platforms & modern web architecture,\nPython/Django full-stack development, and enterprise systems.",
   stats: [
     { value: "3+", label: "Years Tech Experience" },
-    { value: "3", label: "Live UAE Enterprise Websites" },
-    { value: "8+", label: "Professional Certifications" },
-    { value: "100%", label: "Steyp Assessment Score" },
+    { value: "3", label: "Live UAE Websites" },
+    { value: "8+", label: "Certifications" },
+    { value: "100%", label: "Steyp Score" },
   ],
   ctaPrimary: { text: "Explore My Work", href: "#projects" },
   ctaSecondary: { text: "Get In Touch", href: "#contact" },
