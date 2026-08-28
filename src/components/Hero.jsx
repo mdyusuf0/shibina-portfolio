@@ -6,7 +6,7 @@ import { heroContent, personalInfo, socialLinks } from '../data/portfolioData';
 const Hero = () => {
   const videoRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isMuted, setIsMuted] = useState(true);
+  const [isMuted, setIsMuted] = useState(false);
   const [isVideoReady, setIsVideoReady] = useState(false);
 
   useEffect(() => {
@@ -34,38 +34,42 @@ const Hero = () => {
 
   const toggleVideo = (e) => {
     e.stopPropagation();
-    if (videoRef.current) {
-      if (videoRef.current.paused) {
-        videoRef.current.muted = false;
-        setIsMuted(false);
-        videoRef.current.play().then(() => {
-          setIsPlaying(true);
-        }).catch((err) => {
-          console.warn("Autoplay blocked, playing muted fallback:", err);
-          videoRef.current.muted = true;
-          setIsMuted(true);
-          videoRef.current.play();
-          setIsPlaying(true);
-        });
-      } else {
-        videoRef.current.pause();
-        setIsPlaying(false);
-      }
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (video.paused) {
+      // Unmute audio so sound works properly upon manual click play
+      video.muted = false;
+      setIsMuted(false);
+
+      video.play().then(() => {
+        setIsPlaying(true);
+      }).catch((err) => {
+        console.warn("Autoplay with audio blocked, playing muted fallback:", err);
+        video.muted = true;
+        setIsMuted(true);
+        video.play();
+        setIsPlaying(true);
+      });
+    } else {
+      video.pause();
+      setIsPlaying(false);
     }
   };
 
   const toggleAudio = (e) => {
     e.stopPropagation();
-    if (videoRef.current) {
-      videoRef.current.muted = !videoRef.current.muted;
-      setIsMuted(videoRef.current.muted);
+    const video = videoRef.current;
+    if (video) {
+      video.muted = !video.muted;
+      setIsMuted(video.muted);
     }
   };
 
   return (
     <section className="relative w-full min-h-screen overflow-hidden bg-[#FBFBFD] pt-[46px]">
       
-      {/* 100% Crisp Background Poster (NO white fade overlay) */}
+      {/* 100% Crisp Background Poster (Shows until user clicks Play) */}
       {personalInfo.videoPoster && (
         <div 
           className="absolute top-[46px] left-0 w-full h-[calc(100vh-46px)] bg-cover bg-center z-0 transition-opacity duration-1000 opacity-100"
@@ -76,18 +80,16 @@ const Hero = () => {
         />
       )}
 
-      {/* 100% Crisp Background Video (NO white layer, 100% opacity) */}
+      {/* Background Video — NO autoPlay, plays ONLY on manual click with sound */}
       {personalInfo.videoUrl && (
         <video
           ref={videoRef}
           loop
           playsInline
-          muted
-          autoPlay
           onLoadedData={handleVideoLoad}
           onCanPlay={handleVideoLoad}
           className={`absolute top-[46px] left-0 w-full h-[calc(100vh-46px)] object-cover z-0 transition-opacity duration-1000 ${
-            isVideoReady ? 'opacity-100' : 'opacity-0'
+            isPlaying && isVideoReady ? 'opacity-100' : 'opacity-0'
           }`}
           style={{ objectPosition: 'center 20%' }}
         >
@@ -95,7 +97,7 @@ const Hero = () => {
         </video>
       )}
 
-      {/* Floating Right Side Social Icons Dock (Cleanly docked on right edge) */}
+      {/* Floating Right Side Social Icons Dock */}
       <div 
         data-aos="fade-left"
         data-aos-delay="400"
@@ -163,7 +165,7 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Content Container (Directly on Hero Background) */}
+      {/* Content Container */}
       <div className="absolute top-[46px] left-0 bottom-0 z-20 pl-6 md:pl-12 lg:pl-20 pr-6 pb-8 md:pb-[3%] flex flex-col md:flex-row justify-end md:justify-between items-start md:items-end text-left w-full max-w-full">
         
         {/* Left Side Content */}
@@ -266,12 +268,13 @@ const Hero = () => {
 
         </div>
 
-        {/* Right Side: Play Video Controller */}
+        {/* Right Side: Play Video & Mute Controls */}
         <div 
           data-aos="zoom-in"
           data-aos-delay="600"
           className="mt-6 md:mt-0 mr-4 md:mr-8 flex flex-row md:flex-col items-center gap-3 cursor-pointer group self-start md:self-auto z-20"
         >
+          {/* Play/Pause Button */}
           <div 
             onClick={toggleVideo}
             className="flex flex-col items-center gap-1 group/play"
@@ -292,6 +295,7 @@ const Hero = () => {
             </span>
           </div>
 
+          {/* Mute/Unmute Toggle Button */}
           {isPlaying && (
             <button 
               onClick={toggleAudio}
@@ -310,7 +314,7 @@ const Hero = () => {
                   <svg className="w-3.5 h-3.5 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
                   </svg>
-                  <span>Audio On</span>
+                  <span>Audio Enabled</span>
                 </>
               )}
             </button>
